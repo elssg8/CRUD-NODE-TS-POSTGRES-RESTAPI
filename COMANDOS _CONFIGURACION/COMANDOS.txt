@@ -1,0 +1,24 @@
+//para crear el package.json
+npm init -y 
+
+//para instalar typescript
+npm i typescript -D
+
+//compilador de typescript y configuracion
+npx tsc --init
+
+//para instalar express y pg (postgres)
+npm i express pg
+
+//para instalar los tipos de datos de express y pg (para que typescript entienda los modulos)
+npm i @types/express @types/pg -D
+
+//para instalar nodemon (para que se reinicie el servidor cada vez que se haga un cambio)
+npm i nodemon -D
+
+//para instalar concurrently (para que se ejecuten varios comandos a la vez)
+npm i concurrently -D
+
+
+
+

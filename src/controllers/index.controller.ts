@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import e, { Request, Response } from 'express';
 import { pool } from '../database';
 import { QueryResult } from "pg";
 
@@ -21,9 +21,9 @@ export const getUserbyId = async (req: Request, res: Response): Promise<Response
 
 export const createUser = async (req: Request, res: Response): Promise<Response> => { 
     // console.log(req.body); // req.body es el objeto que se pasa por el body
-    const { name, email } = req.body;
-    const response: QueryResult = await pool.query('INSERT INTO users (name, email) VALUES ($1, $2)', [name, email]);
-    return res.json({
+    const { name, email } = req.body; // destructuring del objeto que se pasa por el body para obtener los valores de name y email
+    const response: QueryResult = await pool.query('INSERT INTO users (name, email) VALUES ($1, $2)', [name, email]); 
+    return res.json({ 
         message: 'User Added Successfully',
         body: {
             user: {
@@ -34,6 +34,27 @@ export const createUser = async (req: Request, res: Response): Promise<Response>
     
 }
 
-// export const updateUser = (req, resp): Promise<Response> => {}
+export const updateUser = async (req: Request, res: Response): Promise<Response> => {
+    const id = parseInt(req.params.id); // el req.params.id es el id que se pasa por la url
+    const { name, email } = req.body; // destructuring del objeto que se pasa por el body para obtener los valores de name y email
+    const response: QueryResult = await pool.query('UPDATE users SET name = $1, email = $2 WHERE id = $3', [name, email, id]);
+    //validar si el usuario existe
+    if (response.rowCount === 0) {
+        return res.json(`User ${id} does not exist`);
+    }
+    else{
+        return res.json(`User ${id} Updated Successfully`); 
+    }
+}
 
-// export const deleteUser = (req, resp): Promise<Response> => {}
+export const deleteUser = async (req: Request, res: Response): Promise<Response> => {
+    const id = parseInt(req.params.id); // el req.params.id es el id que se pasa por la url
+    const response: QueryResult = await pool.query('DELETE FROM users WHERE id = $1', [id]);
+    //validar si el usuario existe
+    if (response.rowCount === 0) {
+        return res.json(`User ${id} does not exist`);
+    }
+    else{
+        return res.json(`User ${id} Deleted Successfully`);
+    }
+}

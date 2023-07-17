@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createUser = exports.getUserbyId = exports.getUsers = void 0;
+exports.deleteUser = exports.updateUser = exports.createUser = exports.getUserbyId = exports.getUsers = void 0;
 const database_1 = require("../database");
 const getUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -41,4 +41,27 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     });
 });
 exports.createUser = createUser;
+const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = parseInt(req.params.id);
+    const { name, email } = req.body;
+    const response = yield database_1.pool.query('UPDATE users SET name = $1, email = $2 WHERE id = $3', [name, email, id]);
+    if (response.rowCount === 0) {
+        return res.json(`User ${id} does not exist`);
+    }
+    else {
+        return res.json(`User ${id} Updated Successfully`);
+    }
+});
+exports.updateUser = updateUser;
+const deleteUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = parseInt(req.params.id);
+    const response = yield database_1.pool.query('DELETE FROM users WHERE id = $1', [id]);
+    if (response.rowCount === 0) {
+        return res.json(`User ${id} does not exist`);
+    }
+    else {
+        return res.json(`User ${id} Deleted Successfully`);
+    }
+});
+exports.deleteUser = deleteUser;
 //# sourceMappingURL=index.controller.js.map

@@ -1,3 +1,5 @@
+-- psql -U postgres
+
 CREATE DATABASE firstapi;
 
 CREATE TABLE users(

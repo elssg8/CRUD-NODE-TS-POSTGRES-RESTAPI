@@ -19,6 +19,8 @@ npm i nodemon -D
 //para instalar concurrently (para que se ejecuten varios comandos a la vez)
 npm i concurrently -D
 
-
+//para configurar el git
+git config --global user.name "elssg8"
+git config --global user.email "egarciac028@alumno.uaemex.mx"
 
 

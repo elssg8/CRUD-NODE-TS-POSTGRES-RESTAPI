@@ -9,6 +9,6 @@ const index_1 = __importDefault(require("./routes/index"));
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
 app.use(index_1.default);
-app.listen(3000);
+app.listen('3000');
 console.log('Server on port', 3000);
 //# sourceMappingURL=index.js.map

@@ -10,7 +10,7 @@ app.use(express.urlencoded({extended: false})); // para que entienda los datos q
 
 app.use(indexRoutes); // para que use las rutas que estan en indexRoutes
 
-app.listen(3000);
+app.listen('3000');
 console.log('Server on port', 3000);
 
 

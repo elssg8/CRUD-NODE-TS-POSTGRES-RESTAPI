@@ -9,3 +9,9 @@ CREATE TABLE users(
 );
 
 INSERT INTO users (name, email) VALUES ('John', 'john@ibm.com'), ('Ryan', 'ryan@ibm.com');
+
+CREATE TABLE uaemexUser(
+    id SERIAL PRIMARY KEY,
+    email TEXT,
+    unip TEXT
+);

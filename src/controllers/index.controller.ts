@@ -5,7 +5,7 @@ import { QueryResult } from "pg";
 
 export const getUsers = async (req: Request, res: Response): Promise<Response> => {
     try {
-        const response: QueryResult = await pool.query('SELECT * FROM users'); 
+        const response: QueryResult = await pool.query('SELECT * FROM uaemexuser'); 
         return res.status(200).json(response.rows); // response.rows es el array de objetos que devuelve la consulta
     } catch (error) {
         console.log(error);
@@ -20,14 +20,14 @@ export const getUserbyId = async (req: Request, res: Response): Promise<Response
 }
 
 export const createUser = async (req: Request, res: Response): Promise<Response> => { 
-    // console.log(req.body); // req.body es el objeto que se pasa por el body
-    const { name, email } = req.body; // destructuring del objeto que se pasa por el body para obtener los valores de name y email
-    const response: QueryResult = await pool.query('INSERT INTO users (name, email) VALUES ($1, $2)', [name, email]); 
+    console.log(req.body); // req.body es el objeto que se pasa por el body
+    const { email, unip } = req.body; // destructuring del objeto que se pasa por el body para obtener los valores de name y email
+    const response: QueryResult = await pool.query('INSERT INTO uaemexuser (email, unip) VALUES ($1, $2)', [email, unip]); 
     return res.json({ 
         message: 'User Added Successfully',
         body: {
             user: {
-                name, email
+                email, unip
             }
         }
     })

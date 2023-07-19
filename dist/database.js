@@ -5,7 +5,7 @@ const pg_1 = require("pg");
 exports.pool = new pg_1.Pool({
     user: 'postgres',
     host: 'localhost',
-    password: 'SSelssg8',
+    password: '$elssG8;',
     database: 'firstapi',
     port: 5432
 });

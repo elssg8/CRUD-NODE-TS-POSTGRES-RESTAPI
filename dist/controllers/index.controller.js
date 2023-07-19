@@ -13,7 +13,7 @@ exports.deleteUser = exports.updateUser = exports.createUser = exports.getUserby
 const database_1 = require("../database");
 const getUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const response = yield database_1.pool.query('SELECT * FROM users');
+        const response = yield database_1.pool.query('SELECT * FROM uaemexuser');
         return res.status(200).json(response.rows);
     }
     catch (error) {
@@ -29,13 +29,14 @@ const getUserbyId = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
 });
 exports.getUserbyId = getUserbyId;
 const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { name, email } = req.body;
-    const response = yield database_1.pool.query('INSERT INTO users (name, email) VALUES ($1, $2)', [name, email]);
+    console.log(req.body);
+    const { email, unip } = req.body;
+    const response = yield database_1.pool.query('INSERT INTO uaemexuser (email, unip) VALUES ($1, $2)', [email, unip]);
     return res.json({
         message: 'User Added Successfully',
         body: {
             user: {
-                name, email
+                email, unip
             }
         }
     });
